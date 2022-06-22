@@ -12,9 +12,33 @@ label.photos = photos
 label.counter = 0
 
 
+
 def next_pic():
+    leftX = 0
+    def move_up(event):
+        label.place(relx = 0.0,
+                 rely = 1.0,
+                 anchor ='sw')
+
+    def move_down(event):
+        label.place(relx = 5.0,
+                 rely = 2.0,
+                 anchor ='sw')
+    def move_left(event):
+        label.place(relx = 2.0,
+                 rely = 10.0,
+                 anchor ='sw')
+    def move_right(event):
+        label.place(relx = -5.0,
+                 rely = -2.0,
+                 anchor ='sw')
+
+    win.bind("<w>", move_up)
+    win.bind("<s>", move_down)
+    win.bind("<a>",move_left)
+    win.bind("<d>",move_right)
     label['image'] = label.photos[label.counter % len(label.photos)]
-    label.after(1000, next_pic)
+    # label.after(1000, next_pic)
     label.counter += 1
 
 
@@ -25,7 +49,7 @@ win.mainloop()
 
 
 #################################################################################3
-from tkinter import *
+# from tkinter import *
 import time
 import random
 #
@@ -59,27 +83,27 @@ import random
 #
 #
 # window.mainloop()
-
-def move_up(event):
-    canvas.move(myimage,0,-10)
-def move_down(event):
-    canvas.move(myimage,0,+10)
-def move_left(event):
-    canvas.move(myimage,-10,0)
-def move_right(event):
-    canvas.move(myimage,+10,0)
-
-window = Tk()
-
-window.bind("<w>",move_up)
-window.bind("<s>",move_down)
-window.bind("<a>",move_left)
-window.bind("<d>",move_right)
-
-canvas = Canvas(window,width=500,height=500)
-canvas.pack()
-
-photoimage = PhotoImage(file='This Ramen Is My Girlfriend.png')
-myimage = canvas.create_image(0,0,image=photoimage,anchor=NW)
-
-window.mainloop()
+#
+# def move_up(event):
+#     canvas.move(myimage,0,-10)
+# def move_down(event):
+#     canvas.move(myimage,0,+10)
+# def move_left(event):
+#     canvas.move(myimage,-10,0)
+# def move_right(event):
+#     canvas.move(myimage,+10,0)
+#
+# window = Tk()
+#
+# window.bind("<w>",move_up)
+# window.bind("<s>",move_down)
+# window.bind("<a>",move_left)
+# window.bind("<d>",move_right)
+#
+# canvas = Canvas(window,width=500,height=500)
+# canvas.pack()
+#
+# photoimage = PhotoImage(file='This Ramen Is My Girlfriend.png')
+# myimage = canvas.create_image(0,0,image=photoimage,anchor=NW)
+#
+# window.mainloop()
