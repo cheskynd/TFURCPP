@@ -6,7 +6,7 @@ import glob
 import numpy as np
 
 board = Arduino('COM4')
-path = glob.glob("C:/Users/Makerspace BC/Pictures/Camera Roll/*.jpg")
+path = glob.glob("C:\Users\landerosn\Pictures\Marvel*.jpg")
 images1 = []
 
 # Analog Pins

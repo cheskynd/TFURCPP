@@ -1,6 +1,8 @@
 import tkinter
 import _tkinter
 import tkinter
+from tkinter import *
+
 
 win = tkinter.Tk()
 win.title("GIF TEST")
@@ -14,7 +16,7 @@ label.counter = 0
 
 def next_pic():
     label['image'] = label.photos[label.counter % len(label.photos)]
-    label.after(1000, next_pic)
+    label.after(2000, next_pic)
     label.counter += 1
 
 
@@ -25,7 +27,6 @@ win.mainloop()
 
 
 #################################################################################3
-from tkinter import *
 import time
 import random
 #
@@ -59,7 +60,7 @@ import random
 #
 #
 # window.mainloop()
-
+#########################################################33
 def move_up(event):
     canvas.move(myimage,0,-10)
 def move_down(event):
@@ -79,7 +80,7 @@ window.bind("<d>",move_right)
 canvas = Canvas(window,width=500,height=500)
 canvas.pack()
 
-photoimage = PhotoImage(file='This Ramen Is My Girlfriend.png')
+photoimage = PhotoImage(file='lion.png')
 myimage = canvas.create_image(0,0,image=photoimage,anchor=NW)
 
 window.mainloop()
