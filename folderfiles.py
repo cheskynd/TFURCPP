@@ -1,6 +1,20 @@
 import cv2
 import glob
 import numpy as np
+from PIL import Image
+
+#shows transperancy
+path = cv2.imread("blue.jpg")
+bgra = cv2.cvtColor(path, cv2.COLOR_BGR2BGRA)
+#transperancy number, if its 0 then it will be fully transparent
+bgra[...,3] = 127
+cv2.imwrite('result.png',bgra)
+t= Image.open('result.png')
+t.show()
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+
 
 path = glob.glob("C:/Users/Makerspace BC/Pictures/Camera Roll/*.jpg")
 images1 = []
@@ -17,3 +31,6 @@ for file in path:
     cv2.imshow("translation", imgtran)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+
+
