@@ -5,6 +5,8 @@ import tkinter as tk
 from PIL import ImageTk
 from tkinter import *
 import ctypes
+from PIL import Image, ImageTk
+
 
 
 #shows transperancy with open CV
@@ -20,15 +22,15 @@ import ctypes
 
 #shows transperancy with tkinter
 
-root = tk.Tk()
-# use opacity alpha values from 0.0 to 1.0
-# opacity/tranparency applies to image and frame
-root.wm_attributes('-alpha', 0.3)
-# use a GIF image you have in the working directory
-# or give full path
-photo = tk.PhotoImage(file="lion.png")
-tk.Label(root, image=photo).pack()
-root.mainloop()
+# root = tk.Tk()
+# # use opacity alpha values from 0.0 to 1.0
+# # opacity/tranparency applies to image and frame
+# root.wm_attributes('-alpha', 0.3)
+# # use a GIF image you have in the working directory
+# # or give full path
+# photo = tk.PhotoImage(file="lion.png")
+# tk.Label(root, image=photo).pack()
+# root.mainloop()
 
 
 
@@ -48,6 +50,26 @@ root.mainloop()
 #     cv2.imshow("translation", imgtran)
 #     cv2.waitKey(0)
 #     cv2.destroyAllWindows()
+
+##################################################################333
+#resizing image through TK
+root = Tk()
+
+# Read the Image
+image = Image.open("newyork.png")
+
+# Resize the image using resize() method
+resize_image = image.resize((400, 400))
+
+img = ImageTk.PhotoImage(resize_image)
+
+# create label and add resize image
+label1 = Label(image=img)
+label1.image = img
+label1.pack()
+
+# Execute Tkinter
+root.mainloop()
 
 
 

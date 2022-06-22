@@ -3,6 +3,8 @@ import _tkinter
 import tkinter
 from tkinter import *
 
+from PIL import Image, ImageTk
+
 
 win = tkinter.Tk()
 win.title("GIF TEST")
@@ -80,7 +82,7 @@ window.bind("<d>",move_right)
 canvas = Canvas(window,width=500,height=500)
 canvas.pack()
 
-photoimage = PhotoImage(file='lion.png')
+photoimage = PhotoImage(file= 'lion.png')
 myimage = canvas.create_image(0,0,image=photoimage,anchor=NW)
 
 window.mainloop()
