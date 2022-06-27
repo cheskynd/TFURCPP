@@ -5,9 +5,8 @@ import tkinter as tk
 from PIL import ImageTk
 from tkinter import *
 import ctypes
+import tkinter
 from PIL import Image, ImageTk
-
-
 
 #shows transperancy with open CV
 # path = cv2.imread("blue.jpg")
@@ -34,7 +33,7 @@ from PIL import Image, ImageTk
 
 
 
-#using cv to run a cycle of images
+#using cv to run a cycle of images with resizing
 # path = glob.glob("C:\Users\landerosn\Pictures\Marvel*.jpg")
 # images1 = []
 # for file in path:
@@ -53,22 +52,87 @@ from PIL import Image, ImageTk
 
 ##################################################################333
 #resizing image through TK
-root = Tk()
+# root = Tk()
+#
+# # Read the Image
+# image = Image.open("newyork.png")
+#
+# # Resize the image using resize() method
+# resize_image = image.resize((400, 400))
+#
+# img = ImageTk.PhotoImage(resize_image)
+#
+# # create label and add resize image
+# label1 = Label(image=img)
+# label1.image = img
+# label1.pack()
+#
+# # Execute Tkinter
+# root.mainloop()
 
-# Read the Image
-image = Image.open("newyork.png")
 
-# Resize the image using resize() method
+###########################################################
+# root = Tk()
+#
+# # Read the Image
+# image = Image.open("newyork.png")
+#
+# # Resize the image using resize() method
+# resize_image = image.resize((400, 400))
+#
+# img = ImageTk.PhotoImage(resize_image)
+#
+# # create label and add resize image
+# label1 = Label(image=img)
+# label1.image = img
+# label1.pack()
+#
+# # Execute Tkinter
+# root.mainloop()
+###########################################################33
+# win = tkinter.Tk()
+# win.title("GIF TEST")
+#
+# files = ["lion.png", "newyork.png"]
+# photos = [tkinter.PhotoImage(file=x) for x in files]
+# label = tkinter.Label()
+# label.photos = photos
+# label.counter = 0
+#
+# def next_pic():
+#     label['image'] = label.photos[label.counter % len(label.photos)]
+#     label.after(1000, next_pic)
+#     label.counter += 1
+# label.pack()
+# next_pic()
+#
+# win.mainloop()
+################################################################
+#cycle of pics
+import PIL
+import os
+# import os.path
+# from PIL import Image
+#
+# f = r'C:\Users\landerosn\Pictures\Marvel'
+# imgs = []
+# for file in os.listdir(f):
+#     f_img = f+"/"+file
+#     img = Image.open(f_img)
+#     img = img.resize((400,400))
+#     img.save(f_img)
+##############################################################
+## integration of resizing and transperancy
+
+root = tk.Tk()
+root.wm_attributes('-alpha', 0.3)
+
+image = Image.open("lion.png")
 resize_image = image.resize((400, 400))
-
 img = ImageTk.PhotoImage(resize_image)
-
-# create label and add resize image
 label1 = Label(image=img)
 label1.image = img
 label1.pack()
-
-# Execute Tkinter
 root.mainloop()
 
 
