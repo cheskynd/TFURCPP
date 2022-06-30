@@ -53,8 +53,7 @@ while True:
         tempRead = tempRead * 100
 
         if tempRead > 25:
-
-            # There is where a random picture is picked to be displayed once the temperature is greater then defined
+            # ToDo: There is where a random picture is picked to be displayed once the temperature is greater then defined
             path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
             filenames = glob.glob(os.path.join(path, "*"))
             def process(photo):
@@ -68,7 +67,7 @@ while True:
                 process(random.randint(0, len(filenames)))
             if LsenRead - LsenRead1 >= 10 and LsenRead > 300:
                 # ToDo: Add code that will move the image up(down)
-                img_resized = cv.resize(path, (400, 400))
+                img_resized = cv.resize(path, (400, 400))   # initial units (1466, 868)
                 def translate(img, x, y):
                     transMat = np.float32([[1, 0, x], [0, 1, y]])
                     dimensions = (img.shape[1], img.shape[0])
@@ -104,5 +103,18 @@ while True:
             else:
                 # ToDo: add code that will return the image back to it initial location
                 print(str(tempRead) + '\n')
+        else:
+            # ToDo: add code that will cycle the images and increase transperancy
+            path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
+            filenames = glob.glob(os.path.join(path, "*"))
+            def process(photo):
+                img = cv2.imread(filenames[photo])
+                cv2.imshow("Slideshow", img)
+                if cv2.waitKey(1000) == ord('q'):
+                    return
+            i = 5
+            while i > 0:
+                i -= 1
+                process(random.randint(0, len(filenames)))
 
 
