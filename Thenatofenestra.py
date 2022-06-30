@@ -1,6 +1,6 @@
 # Supervisor/Professor: Dr. Jasmine Jones
 # Authors: Ndizeye Tschesquis, Blade Hicks, Nancy Landeros
-from pyfirmata import Arduino, util
+#from pyfirmata import Arduino, util
 import time
 import cv2
 import glob
@@ -10,49 +10,50 @@ import os
 import cv2 as cv
 
 #
-board = Arduino('/dev/cu.usbmodem1101')
+#board = Arduino('/dev/cu.usbmodem1101')
 
 # Analog Pins
-temp = board.analog[1]  # temperature Sensor
-Lsen = board.analog[2]  # Light Sensor
-Lsen1 = board.analog[3]  # Light Sensor
+# temp = board.analog[1]  # temperature Sensor
+# Lsen = board.analog[2]  # Light Sensor
+# Lsen1 = board.analog[3]  # Light Sensor
 
 # Analog Reads
-tempRead = 0
-tempSens = 0
-LsenRead = 0
-LsenRead1 = 0
+# tempRead = 0
+# tempSens = 0
+# LsenRead = 0
+# LsenRead1 = 0
 
 # Analog setup
-it = util.Iterator(board)
-it.start()
+# it = util.Iterator(board)
+# it.start()
 
 while True:
 
-    Lsen.enable_reporting()
-    temp.enable_reporting()
-    Lsen1.enable_reporting()
-    LsenRead = Lsen.read()
-    LsenRead1 = Lsen1.read()
-    tempsens = temp.read()
+    # Lsen.enable_reporting()
+    # temp.enable_reporting()
+    # Lsen1.enable_reporting()
+    # LsenRead = Lsen.read()
+    # LsenRead1 = Lsen1.read()
+    # tempsens = temp.read()
 
     ''' The initial readings are returned as NoneType so the following if statements forces the program to
     run only when the reading no longer return NoneType values.'''
-    if type(LsenRead1) == float and type(LsenRead) == float and type(tempsens) == float:
+    # if type(LsenRead1) == float and type(LsenRead) == float and type(tempsens) == float:
+    #
+    #     '''The Values reading from the temperature and light sensors in Python are values between 0 and 1
+    #         so we scale by multiplying each read by 1000 to match the values returned in the Arduino app.'''
+    #     LsenRead = LsenRead * 1000
+    #     LsenRead1 = LsenRead1 * 1000
+    #     tempRead = tempsens * 1000
+    #
+    #     # The following equations are used to calculate the temperature in Celcius. The initial readings are voltage
+    #     tempRead = tempRead / 1024
+    #     tempRead = tempRead * 5
+    #     tempRead = tempRead - 0.5
+    #     tempRead = tempRead * 100
 
-        '''The Values reading from the temperature and light sensors in Python are values between 0 and 1
-            so we scale by multiplying each read by 1000 to match the values returned in the Arduino app.'''
-        LsenRead = LsenRead * 1000
-        LsenRead1 = LsenRead1 * 1000
-        tempRead = tempsens * 1000
-
-        # The following equations are used to calculate the temperature in Celcius. The initial readings are voltage
-        tempRead = tempRead / 1024
-        tempRead = tempRead * 5
-        tempRead = tempRead - 0.5
-        tempRead = tempRead * 100
-
-        if tempRead > 25:
+        test = 30
+        if test > 25: #tempRead
             # ToDo: There is where a random picture is picked to be displayed once the temperature is greater then defined
             path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
             filenames = glob.glob(os.path.join(path, "*"))
@@ -65,6 +66,7 @@ while True:
             while i > 0:
                 i -= 1
                 process(random.randint(0, len(filenames)))
+
             if LsenRead - LsenRead1 >= 10 and LsenRead > 300:
                 # ToDo: Add code that will move the image up(down)
                 img_resized = cv.resize(path, (400, 400))   # initial units (1466, 868)
@@ -116,5 +118,3 @@ while True:
             while i > 0:
                 i -= 1
                 process(random.randint(0, len(filenames)))
-
-
