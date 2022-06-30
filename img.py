@@ -3,7 +3,7 @@ import glob
 import os
 import random
 
-path = "/Users/chesky/real-vs-fake-faces/fake/"
+path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
 filenames = glob.glob(os.path.join(path, "*"))
 
 
@@ -12,12 +12,11 @@ def process(photo):
     #     #print(filename)
     img = cv2.imread(filenames[photo])
     cv2.imshow("Slideshow", img)
-    if cv2.waitKey(0) == ord('q'):
+    if cv2.waitKey(1000) == ord('q'):
         return
 
 
 #
-
 i = 5
 while i > 0:
     i -= 1

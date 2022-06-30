@@ -5,7 +5,11 @@ import time
 import cv2
 import glob
 import numpy as np
+import random
+import os
+import cv2 as cv
 
+#
 board = Arduino('/dev/cu.usbmodem1101')
 
 # Analog Pins
@@ -32,7 +36,7 @@ while True:
     LsenRead1 = Lsen1.read()
     tempsens = temp.read()
 
-    ''' The initial readings are returned as NoneType so the following if statements forces the program to 
+    ''' The initial readings are returned as NoneType so the following if statements forces the program to
     run only when the reading no longer return NoneType values.'''
     if type(LsenRead1) == float and type(LsenRead) == float and type(tempsens) == float:
 
@@ -51,18 +55,54 @@ while True:
         if tempRead > 25:
 
             # There is where a random picture is picked to be displayed once the temperature is greater then defined
+            path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
+            filenames = glob.glob(os.path.join(path, "*"))
+            def process(photo):
+                img = cv2.imread(filenames[photo])
+                cv2.imshow("Slideshow", img)
+                if cv2.waitKey(0) == ord('q'):
+                    return
+            i = 5
+            while i > 0:
+                i -= 1
+                process(random.randint(0, len(filenames)))
             if LsenRead - LsenRead1 >= 10 and LsenRead > 300:
                 # ToDo: Add code that will move the image up(down)
+                img_resized = cv.resize(path, (400, 400))
+                def translate(img, x, y):
+                    transMat = np.float32([[1, 0, x], [0, 1, y]])
+                    dimensions = (img.shape[1], img.shape[0])
+                    return cv.warpAffine(img, transMat, dimensions)
+
+                xvar = 0
+                yvar = 0
+                while True:
+                   # xvar = xvar + random.randint(-10, 10)
+                    yvar = yvar + random.randint(-10, 10)
+                    cv.namedWindow("window", cv.WND_PROP_FULLSCREEN)
+                    cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
+                    cv.imshow("window", translate(img_resized, xvar, yvar))
+                    cv.waitKey(250)
 
                 # ToDo: add another if statement for a higher LsenRead value to change the image
+                if LsenRead - LsenRead1 >= 10 and LsenRead > 400:
+                    process(random.randint(0, len(filenames)))
                 pass
 
             elif LsenRead1 - LsenRead >= 10 and LsenRead1 > 300:
                 # ToDO: Add code that will move the image left(right)
-
+                xvar = xvar + random.randint(-10, 10)
+                #yvar = yvar + random.randint(-10, 10)
+                cv.namedWindow("window", cv.WND_PROP_FULLSCREEN)
+                cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
+                cv.imshow("window", translate(img_resized, xvar, yvar))
+                cv.waitKey(250)
                 # ToDo: add another if statement for a higher LsenRead1 value to change the image
+                if LsenRead1 - LsenRead >= 10 and LsenRead1 > 400:
+                    process(random.randint(0, len(filenames)))
                 pass
-
             else:
                 # ToDo: add code that will return the image back to it initial location
                 print(str(tempRead) + '\n')
+
+
