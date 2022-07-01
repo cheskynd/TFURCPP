@@ -32,6 +32,12 @@ def translate(img, x, y):
     dimensions = (img.shape[1], img.shape[0])
     return cv.warpAffine(img, transMat, dimensions)
 
+def overlay(img, alpha, x_size, y_size):
+    overlay = img.copy()
+    output = img.copy()
+    cv.rectangle(overlay, (0,0), (x_size,y_size), (0,0,0), -1)
+    cv.addWeighted(overlay, alpha, img, 1 - alpha, 0, output)
+    return output
 
 if __name__ == '__main__':
     # get_photo things
@@ -44,8 +50,10 @@ if __name__ == '__main__':
     while True:
         rightSens_Var = random.randint(-10, 10)
         leftSens_Var = random.randint(-10, 10)
+        alpha = random.random()
         translated_photo = translate(photo, rightSens_Var, leftSens_Var)
+        overlaid = overlay(translated_photo, alpha, x_size=1466, y_size=868)
 
         # Displays window and image.
-        cv.imshow('window', translated_photo)
+        cv.imshow('window', overlaid)
         cv.waitKey(500)
