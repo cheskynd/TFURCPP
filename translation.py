@@ -2,7 +2,9 @@ import cv2 as cv
 import numpy as np
 import random
 
+
 img = cv.imread('C:/Users/Makerspace BC/Pictures/Saved Pictures/download.jpg')
+
 # cv.imshow('Cat', img)
 img_resized = cv.resize(img, (400,400)) #1466, 868
 
@@ -25,3 +27,4 @@ while True:
     cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
     cv.imshow("window", translate(img_resized, xvar, yvar))
     cv.waitKey(250)
+
