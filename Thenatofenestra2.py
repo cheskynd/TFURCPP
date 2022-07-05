@@ -58,7 +58,7 @@ if __name__ == '__main__':
         ###############################################
 
         translated_photo = translate(photo, rightSens_Var, leftSens_Var)
-        overlaid = overlay(translated_photo, alpha, x_size=1466, y_size=868)
+        overlaid = overlay(translated_photo, alpha, x_size=width, y_size=height)
         print(LsenRead)
         if tempRead > 25:
             # Conditions for the X sensor
