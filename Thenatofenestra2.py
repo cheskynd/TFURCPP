@@ -9,12 +9,6 @@ cv.namedWindow("window", cv.WND_PROP_FULLSCREEN)
 cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
 
 
-# Variable soup
-
-
-# Functions start here
-
-
 def get_photo(photo):
     """
     Gets photo and resizes and returns the resized photo.
@@ -63,7 +57,6 @@ if __name__ == '__main__':
         overlaid = overlay(translated_photo, alpha, x_size=1466, y_size=868)
         print(LsenRead)
         if tempRead > 25:
-
             # Conditions for the X sensor
             if LsenRead >= 300 or LsenRead1 >= 300:
                 # Displays window and image.
@@ -87,27 +80,4 @@ if __name__ == '__main__':
                 cv.imshow('window', overlaid)
                 cv.waitKey(50)
 
-
-                # rightSens_Var1 = random.randint(0, 10)
-
-            #     # todo: If Left Sensor reads 300 or above, move image left on the X-axis (x) pixels.
-            # elif LsenRead > 500:
-            #     pass
-            #     # todo: If Left Sensor reads 500 or above, move image left on the X-axis (x) pixels.
-            # elif LsenRead > 800:
-            #     pass
-            #     # todo: If Left Sensor reads 800 or above, it will trigger an image change.
-            #
-            # # Conditions for the Y sensor
-            # elif LsenRead1 > 300:
-            #     pass
-            #     # todo: If Right Sensor reads 300 or above, move image up on the Y-axis (x) pixels.
-            # elif LsenRead1 > 500:
-            #     pass
-            #     # todo: If Right Sensor reads 500 or above, move image up on the Y-axis (x) pixels.
-            # elif LsenRead1 > 800:
-            #     pass
-            #     # todo: If Right Sensor reads 800 or above, it will trigger and image change.
-            #
-            # else:
-            #     pass
+# todo: Fix the random error
