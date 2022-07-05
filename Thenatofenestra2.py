@@ -5,11 +5,13 @@ import random
 import numpy as np
 from gpiozero import MCP3008
 from gpiozero import PWMLED
+from screeninfo import get_monitors
 
 # This constant make the window full screen.
 cv.namedWindow("window", cv.WND_PROP_FULLSCREEN)
 cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
-
+width = get_monitors()[0].width
+height = get_monitors()[0].height
 
 def get_photo(photo):
     """
@@ -18,7 +20,7 @@ def get_photo(photo):
     :return: img
     """
     img = cv.imread(photo)
-    img = cv.resize(img, (1400, 800))
+    img = cv.resize(img, (width, height))
     return img
 
 
