@@ -3,6 +3,8 @@ import glob
 import os
 import random
 import numpy as np
+from gpiozero import MCP3008
+from gpiozero import PWMLED
 
 # This constant make the window full screen.
 cv.namedWindow("window", cv.WND_PROP_FULLSCREEN)
@@ -36,7 +38,7 @@ def overlay(img, alpha, x_size, y_size):
 
 if __name__ == '__main__':
     # get_photo things
-    path = "C:/Users/Makerspace BC/Pictures/Saved Pictures"
+    path = "/media/pi/UBUNTU 20_0/test_imgs"    
     filenames = glob.glob(os.path.join(path, "*"))
     r = random.randint(0, len(filenames) - 1)
 
