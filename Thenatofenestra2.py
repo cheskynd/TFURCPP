@@ -13,6 +13,12 @@ cv.setWindowProperty("window", cv.WND_PROP_FULLSCREEN, cv.WINDOW_FULLSCREEN)
 width = get_monitors()[0].width
 height = get_monitors()[0].height
 
+#This is the circuit setup
+tempSens = MCP3008(0)
+X_light_sens = MCP3008(2)
+Y_light_sens = MCP3008(1)
+led = PWMLED(21)
+
 def get_photo(photo):
     """
     Gets photo and resizes and returns the resized photo.
