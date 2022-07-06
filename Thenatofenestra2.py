@@ -56,31 +56,43 @@ if __name__ == '__main__':
         leftSens_Var = random.randint(0, 0)
         alpha = random.random()
         ###############################################
+                
+        X_value = X_light_sens.value * 1000
+
+        Y_value = Y_light_sens.value * 1000
+
+        temp_value = (((((tempSens.value * 1000)/1024)*5)-0.5)*100)
 
         translated_photo = translate(photo, rightSens_Var, leftSens_Var)
         overlaid = overlay(translated_photo, alpha, x_size=width, y_size=height)
         print(LsenRead)
-        if tempRead > 25:
+        if temp_value > 25:
             # Conditions for the X sensor
-            if LsenRead >= 300 or LsenRead1 >= 300:
+            if X_value >= 300 or Y_value >= 300:
                 # Displays window and image.
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
 
-            if 350 < LsenRead < 500:
+            if 350 < X_value < 500:
                 rightSens_Var = random.randint(-10, 10)
                 translated_photo = translate(photo, rightSens_Var, leftSens_Var)
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
                 print(LsenRead)
-
-            if 501 < LsenRead < 640:
+                
+            if 350 < Y_value < 500:
+                leftSens_Var = random.randint(-17, 17)
+                translated_photo = translate(photo, rightSens_Var, leftSens_Var)
+                cv.imshow('window', translated_photo)
+                cv.waitKey(50)
+                
+            if 501 < X_value < 640 or 501 < Y_value < 640:
                 photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
                 print("get New image")
 
-            if 641 < LsenRead < 800:
+            if 641 < X_value < 800:
                 cv.imshow('window', overlaid)
                 cv.waitKey(50)
 
