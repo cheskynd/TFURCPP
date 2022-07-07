@@ -43,6 +43,10 @@ def overlay(img, alpha, x_size, y_size):
     cv.addWeighted(overlay, alpha, img, 1 - alpha, 0, output)
     return output
 
+def show_translated_img():
+    translated_photo = translate(photo, rightSens_Var, leftSens_Var)
+    cv.imshow('window', translated_photo)
+    cv.waitKey(50)
 
 if __name__ == '__main__':
     # get_photo things
@@ -52,6 +56,12 @@ if __name__ == '__main__':
 
     # Functions calls
     photo = get_photo(filenames[r])
+    alphas = {60:0,
+              59:.2,
+              58:0.4,
+              57:0.6,
+              56:0.8,
+              55:1.0}
 
     while True:
         # To be modified later with sensor outputs
@@ -60,46 +70,68 @@ if __name__ == '__main__':
         LsenRead1 = random.randint(300, 800)
         rightSens_Var = random.randint(0, 0)
         leftSens_Var = random.randint(0, 0)
-        alpha = random.random()
+#         alpha = random.random()
         ###############################################
-                
+        
         X_value = X_light_sens.value * 1000
 
         Y_value = Y_light_sens.value * 1000
 
         temp_value = (((((tempSens.value * 1000)/1024)*5)-0.5)*100)
+        
+        
 
         translated_photo = translate(photo, rightSens_Var, leftSens_Var)
-        overlaid = overlay(translated_photo, alpha, x_size=width, y_size=height)
-        print(LsenRead)
-        if temp_value > 25:
+        print(temp_value,X_value, Y_value)
+        if temp_value > 61:
             # Conditions for the X sensor
-            if X_value >= 300 or Y_value >= 300:
+            if X_value >= 150 or Y_value >= 150:
                 # Displays window and image.
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
 
-            if 350 < X_value < 500:
-                rightSens_Var = random.randint(-10, 10)
-                translated_photo = translate(photo, rightSens_Var, leftSens_Var)
-                cv.imshow('window', translated_photo)
-                cv.waitKey(50)
-                print(LsenRead)
+            if 180 < X_value < 270:
+                rightSens_Var = random.randint(-17, 17)
+                show_translated_img()
                 
-            if 350 < Y_value < 500:
+            if 180 < Y_value < 270:
                 leftSens_Var = random.randint(-17, 17)
-                translated_photo = translate(photo, rightSens_Var, leftSens_Var)
-                cv.imshow('window', translated_photo)
-                cv.waitKey(50)
-                
-            if 501 < X_value < 640 or 501 < Y_value < 640:
+                show_translated_img()
+
+
+            if 270 < X_value or 270 < Y_value:
                 photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
-                print("get New image")
 
-            if 641 < X_value < 800:
-                cv.imshow('window', overlaid)
-                cv.waitKey(50)
+#            if 400 > X_value and 400 < Y_value:
+#                photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
+#                cv.imshow('window', translated_photo)
+                #cv.waitKey(300)
 
-# todo: Fix the random error
+        # This will iterate through the Images once the candle is turned of without any overlay
+        if  temp_value > 60 and X_value < 150 and Y_value < 150:
+            print(temp_value)
+
+            photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
+            cv.imshow('window', translated_photo)
+            cv.waitKey(50)
+            
+        # This will iterate through the Images once the candle is turned of with overlay as long as the temperature is between 55 and 60
+        if  55 < temp_value < 60 and 150 > X_value and 150 > Y_value:
+      
+            int_temp_value = int(temp_value) # coverts temperature to integer value
+            
+            photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
+            
+            overlaid = overlay(translated_photo, alphas[int_temp_value], x_size=width, y_size=height)
+            
+            cv.imshow('window', overlaid)
+            cv.waitKey(50)
+            
+        # Close the program once temperature is below 55
+#        if  temp_value <= 54.99:
+#            cv.destroyAllWindows()
+        
+
+# todo: Fix the random error 
