@@ -76,7 +76,7 @@ if __name__ == '__main__':
 
         Y_value = Y_light_sens.value * 1000
 
-        translated_photo = translate(photo, rightSens_Var, leftSens_Var)
+        translated_photo = translate(photo, 0, 0)
 
         # Conditions for the X sensor
         if X_value >= 40 or Y_value >= 40:
