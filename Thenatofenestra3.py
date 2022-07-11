@@ -16,6 +16,7 @@ width = get_monitors()[0].width
 height = get_monitors()[0].height
 
 #This is the circuit setup
+
 X_light_sens = MCP3008(2)
 Y_light_sens = MCP3008(1)
 led = PWMLED(21)
@@ -49,16 +50,17 @@ def show_translated_img():
     cv.imshow('window', translated_photo)
     cv.waitKey(50)
     
-def get_random_int():
+def get_filename():
     return filenames[random.randint(0, len(filenames) - 1)]
 
 if __name__ == '__main__':
     # get_photo things
     path = "/media/pi/UBUNTU 20_0/test_imgs"    
     filenames = glob.glob(os.path.join(path, "*"))
-    
+    rightSens_Var = 0
+    leftSens_Var = 0
     # Functions calls
-    photo = get_photo(get_random_int())
+    photo = get_photo(get_filename())
     alphas = {0:0,
               1:.1,
               2:0.2,
@@ -70,7 +72,7 @@ if __name__ == '__main__':
               8:0.8,
               9:0.9,
               10:1.0}
-
+    time_eclipsed = 0
     while True:
         X_value = X_light_sens.value * 1000
 
@@ -80,6 +82,7 @@ if __name__ == '__main__':
 
         # Conditions for the X sensor
         if X_value >= 40 or Y_value >= 40:
+            time_eclipsed = 0
             # Displays window and image.
             cv.imshow('window', translated_photo)
             cv.waitKey(50)
@@ -94,16 +97,29 @@ if __name__ == '__main__':
 
 
         if 180 < X_value or 180 < Y_value:
-            photo = get_photo(get_random_int())
+            photo = get_photo(get_filename())
             cv.imshow('window', translated_photo)
             cv.waitKey(10)
 
         # This will iterate through the Images once the candle is turned of with overlay as long as the temperature is between 55 and 60
-        if 30 > X_value and 30 > Y_value:
-            photo = get_photo(get_random_int())
-            x = 0
-            while x < 10: 
-                overlaid = overlay(translated_photo, alphas[x], x_size=width, y_size=height)
-                cv.imshow('window', overlaid)
-                cv.waitKey(1)
-                x+= 1
+        start_time = time.time()
+        while 30 > X_value and 30 > Y_value and time_eclipsed < 10:
+            print(X_value,Y_value, "\n")
+            photo = get_photo(get_filename())
+            overlaid = overlay(photo, alphas[int(time_eclipsed)], x_size=width, y_size=height)
+            cv.imshow('window', overlaid)
+            cv.waitKey(1)
+            
+            end_time = time.time()
+            time_eclipsed = end_time-start_time
+            
+             
+        
+        black_img = get_photo("/home/pi/Desktop/black_img.jpg")
+        cv.imshow('window',black_img)
+        cv.waitKey(1)
+            
+
+
+                
+                
