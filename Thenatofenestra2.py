@@ -80,27 +80,27 @@ if __name__ == '__main__':
 
     # The alpha values below are used to set the transparency level of the images
     # The Key is the temperature and the Value is the alpha value
-    alphas = {60: 0,
-              59: .1,
-              58: 0.2,
-              57: 0.3,
-              56: 0.4,
-              55: 0.5,
-              54: 0.6,
-              53: 0.7,
-              52: 0.8,
-              51: 0.9,
-              50: 1.0}
+    alphas = {70: 0,
+              69: .1,
+              68: 0.2,
+              67: 0.3,
+              66: 0.4,
+              65: 0.5,
+              64: 0.6,
+              63: 0.7,
+              62: 0.8,
+              61: 0.9,
+              60: 1.0}
 
     while True:
         # All sensor values are scaled by 1000
         light_sens1_val = light_sens1.value * 1000
         light_sens2_val = light_sens2.value * 1000
         temp_value = (((((tempSens.value * 1000) / 1024) * 5) - 0.5) * 100)
-
+        
         translated_photo = translate(photo)
         print(temp_value, light_sens1_val, light_sens2_val)
-        if temp_value > 60:
+        if temp_value > 70:
             # Conditions for the X sensor
             if light_sens1_val >= 40 or light_sens2_val >= 40:
                 # Displays window and image.
@@ -108,10 +108,12 @@ if __name__ == '__main__':
                 cv.waitKey(50)
 
             if 45 < light_sens1_val < 180:
+                leftSens_Var = 0
                 rightSens_Var = random.randint(-17, 17)
                 show_translated_img()
 
             if 45 < light_sens2_val < 180:
+                rightSens_Var = 0
                 leftSens_Var = random.randint(-17, 17)
                 show_translated_img()
 
@@ -121,20 +123,20 @@ if __name__ == '__main__':
                 cv.waitKey(10)
 
         # This will iterate through the Images once the candle is turned off without any overlay
-        if temp_value > 60 and light_sens1_val < 30 and light_sens2_val < 30:
+        if temp_value > 70 and light_sens1_val < 30 and light_sens2_val < 30:
             photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
             cv.imshow('window', translated_photo)
             cv.waitKey(10)
 
         # This will iterate through the Images once the candle is turned off with overlay as long as the temperature
         # is between 55 and 60
-        if 50 < temp_value < 60 and 30 > light_sens1_val and 30 > light_sens2_val:
+        if 60 < temp_value < 70 and 30 > light_sens1_val and 30 > light_sens2_val:
             int_temp_value = int(temp_value)  # coverts temperature to integer value
             photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
             overlaid = overlay(translated_photo, alphas[int_temp_value], overlay_width=width, overlay_height=height)
             cv.imshow('window', overlaid)
             cv.waitKey(10)
-
-        # Close the program once temperature is below 55
-        # if temp_value <= 50:
-        #     cv.destroyAllWindows()
+        if temp_value < 60:
+            overlaid = overlay(translated_photo, 1, overlay_width=width, overlay_height=height)
+            cv.imshow('window', overlaid)
+            cv.waitKey(10)
