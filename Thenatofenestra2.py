@@ -91,7 +91,26 @@ if __name__ == '__main__':
               62: 0.8,
               61: 0.9,
               60: 1.0}
-
+    initial_sens_val1 = light_sens1.value * 1000
+    initial_sens_val2 = light_sens2.value * 1000
+    initial_temp = (((((tempSens.value * 1000) / 1024) * 5) - 0.5) * 100)
+    
+    if initial_temp < 65 and 0 < initial_sens_val1 < 50:
+        start_val = 70
+        flicker = 310
+        stay = 310
+        change_img = 375
+    elif initial_temp < 65 and 50 < initial_sens_val1 < 100:
+        start_val = 100
+        flicker = 350
+        stay = 310
+        change_img = 375
+    elif initial_temp < 65 and 100 < initial_sens_val1:
+        start_val = 100
+        flicker = 350
+        stay = 310
+        change_img = 375  
+        
     while True:
         # All sensor values are scaled by 1000
         light_sens1_val = light_sens1.value * 1000
