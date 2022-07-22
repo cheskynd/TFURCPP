@@ -95,17 +95,18 @@ if __name__ == '__main__':
     initial_sens_val1 = light_sens1.value * 1000
     initial_sens_val2 = light_sens2.value * 1000
 
-    # this if statement sets the
+    # this if statement will set the values for a low light environment
     if initial_sens_val1 < 100:
         start_val = 200
         flicker_val = 310
         change_img_val = 350
 
+    # this if statement will set the values for a medium light environment
     elif 100 < initial_sens_val1 < 200:
         start_val = 250
         flicker_val = 350
         change_img_val = 375
-
+    # this if statement will set the values for a high lighting environment
     elif 200 < initial_sens_val1:
         start_val = 290
         flicker_val = 350
@@ -159,6 +160,8 @@ if __name__ == '__main__':
             overlaid = overlay(translated_photo, alphas[int_temp_value], overlay_width=width, overlay_height=height)
             cv.imshow('window', overlaid)
             cv.waitKey(10)
+
+        # If the temperature value is below 60: a black screen will be shown
         if temp_value < 60:
             overlaid = overlay(translated_photo, 1, overlay_width=width, overlay_height=height)
             cv.imshow('window', overlaid)
