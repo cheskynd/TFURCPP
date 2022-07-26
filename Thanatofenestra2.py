@@ -73,6 +73,7 @@ def show_translated_img():
 
 if __name__ == '__main__':
     # get_photo things
+    #path= "ThanatoPics"
     path = "/home/pi/Desktop/TFURCPP-main/test_imgs"  # This is a folder with the images that are used in this program.
     filenames = glob.glob(os.path.join(path, "*"))
 
