@@ -94,7 +94,6 @@ if __name__ == '__main__':
     # These are the initial sensor values
     initial_sens_val1 = light_sens1.value * 1000
     initial_sens_val2 = light_sens2.value * 1000
-
     while True:
         # All sensor values are scaled by 1000
         light_sens1_val = light_sens1.value * 1000
@@ -102,42 +101,44 @@ if __name__ == '__main__':
         temp_value = (((((tempSens.value * 1000) / 1024) * 5) - 0.5) * 100)
 
         translated_photo = translate(photo)
-        print(temp_value, light_sens1_val, light_sens2_val)
+        
+        print('\n',initial_sens_val1,initial_sens_val2,'\n')
+        print(temp_value,light_sens1_val, light_sens2_val)
         if temp_value > 70:
 
             # Display an image if light_sens1_val and light_sens2_val are equal of greater that then start_val
-            if light_sens1_val > initial_sens_val1+10 or light_sens1_val > initial_sens_val2+10:
+            if light_sens1_val > initial_sens_val1+20 or light_sens1_val > initial_sens_val2+20:
                 # Displays window and image.
                 cv.imshow('window', translated_photo)
                 cv.waitKey(50)
 
             # flicker the image on the X-axis if light_sens1_val is between the flicker_val and change_img_val
-            if light_sens1_val > initial_sens_val1 + 100:
+            if light_sens1_val > initial_sens_val1 + 130:
                 leftSens_Var = 0
                 rightSens_Var = random.randint(-17, 17)
                 show_translated_img()
 
             # flicker the image on the Y-axis if light_sens2_val is between the flicker_val and change_img_val
-            if light_sens2_val > initial_sens_val2 + 100:
+            if light_sens2_val > initial_sens_val2 + 130:
                 rightSens_Var = 0
                 leftSens_Var = random.randint(-17, 17)
                 show_translated_img()
 
             # change the image if the light sensor values are above the change_img_val value
-            if light_sens1_val > initial_sens_val1 + 150 or light_sens2_val > initial_sens_val2+ 150:
+            if light_sens1_val > initial_sens_val1 + 200 or light_sens2_val > initial_sens_val2+ 200:
                 photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
                 cv.imshow('window', translated_photo)
                 cv.waitKey(10)
 
         # This will iterate through the Images once the candle is turned off without any overlay
-        if temp_value > 70 and light_sens1_val < initial_sens_val1 and light_sens2_val < initial_sens_val2:
+        if temp_value > 70 and light_sens1_val < initial_sens_val1+30 and light_sens2_val < initial_sens_val2+30:
             photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
             cv.imshow('window', translated_photo)
             cv.waitKey(10)
 
         # This will iterate through the Images once the candle is turned off with overlay as long as the temperature
         # is between 55 and 60
-        if 60 < temp_value < 70 and initial_sens_val1 > light_sens1_val and initial_sens_val2 > light_sens2_val:
+        if 60 < temp_value < 70 and initial_sens_val1+30 > light_sens1_val and initial_sens_val2+30 > light_sens2_val:
             int_temp_value = int(temp_value)  # coverts temperature to integer value
             photo = get_photo(filenames[random.randint(0, len(filenames) - 1)])
             overlaid = overlay(translated_photo, alphas[int_temp_value], overlay_width=width, overlay_height=height)
