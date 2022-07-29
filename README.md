@@ -5,6 +5,10 @@ Developed by:
 - [Nancy Landeros](https://github.com/nancylanderos) - `Berea College`
 
 Libraries:
-* OpenCV2
-* numpy
-* 
+- OpenCV
+- numpy
+- Pillow 
+- gpiozero 
+- screeninfo 
+- future
+- Click [Here](requirements.txt) to view requirements file 
