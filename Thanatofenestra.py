@@ -27,7 +27,7 @@ def get_photo(photo_ad):
     :param photo_ad: Image address as a string
     :return: Resized Photo
     """
-    img = cv.imread(photo)
+    img = cv.imread(photo_ad)
     img = cv.resize(img, (width, height))
     return img
 
