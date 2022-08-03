@@ -21,10 +21,10 @@ light_sens1 = MCP3008(2)
 light_sens2 = MCP3008(1)
 
 
-def get_photo(photo):
+def get_photo(photo_ad):
     """
     Gets photo and resizes and returns the resized photo.
-    :param photo: Image address as a string
+    :param photo_ad: Image address as a string
     :return: Resized Photo
     """
     img = cv.imread(photo)
