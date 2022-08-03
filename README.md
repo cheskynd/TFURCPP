@@ -73,4 +73,7 @@ Make the Following connections between the MCP3008 and Raspberry Pi
 - MCP3008 AGND to Raspberry Pi GND
 - MCP3008 DGND to Raspberry Pi GND
 
+**For a step-by-step Circuit Tutorial click** [Here](https://docs.google.com/presentation/d/19ZnFAh5yts9XgJ08IMe_UG5gRqYu8efAYSAV-OgQSvA/edit?usp=sharing)
 
+
+**For a Jupyter Notebook Guide of the program click** [Here](ThanatoFenestra.ipynb)
